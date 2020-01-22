@@ -36,11 +36,15 @@ for iter in range(iterations):
 
 
 # Create output file name
-outFileName = sys.argv[1].split("."[0]) + ".out"
+outFileName = sys.argv[1].split(".")[0] + ".out"
+#print(np.array([w_analytic, w_gd]).T)
 
+# Create output file
 outFile = open(outFileName, "w")
-outFile.write(w_analytic + "\n" + w_gd)
 outFile.close()
-
-print(w_analytic)
-print(w_gd)
+outFile = open(outFileName, 'ab')
+with open(outFileName, "a") as outFile:
+	np.savetxt(outFile, w_analytic, fmt='%5.4f')
+	outFile.write("\n")
+	np.savetxt(outFile, w_gd, fmt='%5.4f')
+outFile.close()
